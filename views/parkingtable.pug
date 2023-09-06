@@ -1,0 +1,121 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  title Home
+  meta(name='viewport' content='width=device-width, initial-scale=1')
+  link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css')
+  //
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  link(rel='stylesheet' href='/css/styleh.css')
+  link(rel='stylesheet' href='/css/style.css')
+  link(rel='stylesheet' href='/css/mystyles.css')
+.page
+  header(tabindex='0') Dockville Parking
+  #nav-container
+    .bg
+    .button(tabindex='0')
+      span.icon-bar
+      span.icon-bar
+      span.icon-bar
+    #nav-content(tabindex='0')
+      ul
+        li
+          a(href='home') Home
+        li
+          a(href='blog') Blog
+        li
+          a(href='about') About
+        li
+          a(href='contact') Contact
+        li.dropdown
+          a.dropdown-toggle(href='#0') Services
+          ul.dropdown-menu
+            li
+              a(href='parking') Parking
+            li
+              a(href='tiretable') Tire Clinc
+            li
+              a(href='batterytable') Battery Section
+h1.display-4.font-weight-bold parking Table
+a.btn.btn-success(href="parking" style='position: absolute; top: 185px; right: 120px') +Add Customer
+h2 Total amount: #{custotal}
+h2#tx Total number: #{Parkingcount}
+div#table-container(style="position:absolute;top:250px")
+  table.table.table-dark.table-striped.table-hover
+    thead.table-dark
+      tr
+        th(scope='col') FirstName
+        th(scope='col') Lastname
+        th(scope='col') Gender 
+        th(scope='col') NumberPlate
+        th(scope='col') Color
+        th(scope='col') Arrival time
+        th(scope='col') Departure time 
+        th(scope='col') Model 
+        th(scope='col') Phone 
+        th(scope='col') Date 
+        th(scope='col') Period 
+        th(scope='col') Amount 
+        th(scope='col') NIN
+        th(scope='col') TireClinic 
+        th(scope='col') Battery Size 
+        th(scope='col') Delete
+        th(scope='col') Edit
+        th(scope='col') Signoff
+    
+    tbody
+    if parkings.length 
+      each parking in parkings
+        tr
+          th #{parking.firstname}
+          td #{parking.lastname}
+          td #{parking.gender}
+          td #{parking.numberplate}
+          td #{parking.color}
+          td #{parking.arrivaltime}
+          td #{parking.departuretime}
+          td #{parking.model}
+          td #{parking.phone}
+          td #{parking.date}
+          td #{parking.period}
+          td #{parking.amount}
+          td #{parking.nin}
+          td #{parking.tireclinic}
+          td #{parking.batterysize}
+          td 
+            form(action='/api/parking/delete' method='POST')
+              input(type="hidden" name='id' value=parking._id)
+              button.btn.btn-danger(type="submit" onclick="confirmDelete(event)") Delete
+          td  
+            a.btn.btn-warning(href="/api/parking/edit/"+parking._id) Edit
+          td  
+            a.btn.btn-success(href="/api/parking/edit/"+parking._id) Signoff
+    else 
+      p there are no employees in the database     
+script(src='https://code.jquery.com/jquery-3.3.1.slim.min.js')
+script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js')
+script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js')
+script(src='https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.4/js/tether.min.js')
+script(src='/script/pscript.js')
+script.
+  function confirmDelete(event) {
+    if (confirm("Are you sure you want to delete this employee?")) {
+      // Proceed with form submission
+    } else {
+      event.preventDefault(); // Cancel form submission
+    }
+  }
+  script.
+    const servicesToggle = document.querySelector('.dropdown-toggle');
+    const servicesDropdown = document.querySelector('.dropdown-menu');
+    servicesToggle.addEventListener('click', function (event) {
+    event.preventDefault(); // Prevent default link behavior
+    servicesDropdown.classList.toggle('show');
+    });
+    // Close the dropdown if clicking outside
+    document.addEventListener('click', function (event) {
+    if (!servicesToggle.contains(event.target) && !servicesDropdown.contains(event.target)) {
+    servicesDropdown.classList.remove('show');
+    }
+    });

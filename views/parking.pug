@@ -1,0 +1,181 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  title Parking
+  meta(name='viewport' content='width=device-width, initial-scale=1')
+  link(href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9' crossorigin='anonymous')
+  link(rel='stylesheet' href='/css/styleh.css')
+  link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css')
+  link(rel='stylesheet' href='/css/mystyles.css')
+.page
+  header(tabindex='0' style='position: absolute; left: 0px;')
+  header(style='position: absolute; left: 606px;') Docvile Parking
+  #nav-container
+    .bg
+    .button(tabindex='0' style='position: fixed;')
+      span.icon-bar
+      span.icon-bar
+      span.icon-bar
+    #nav-content(tabindex='0')
+      ul
+        li
+          a(href='home') Home
+        li
+          a(href='#0') Blog
+        li
+          a(href='#0') About
+        li
+          a(href='#0') Contact
+        li
+          a(href='#0') Services
+  div(style='background-color: rgba(46, 184, 209); position:absolute; height: 800px; width: 752px; top: 70%; left: 50%; opacity:80%;transform: translate(-50%, -50%);')
+    div(style='position: relative; width: 703px; height: 674px; left: 20px; top: 20px;')
+      form(name='registration' method='POST' action='/api/regParking' onsubmit='return validate(event);')
+        .row.g-3
+          .col(style='text-align:center;')
+            h1(style='font-size: 40px;') Parking Form
+        br
+        br
+        .row.g-3
+          .col
+            input.form-control(type='text' placeholder='First name' aria-label='First name' name='firstname')
+            span#firstname-error
+          .col
+            input.form-control(type='text' placeholder='Last name' aria-label='Last name' name='lastname')
+            span#lastname-error
+          .col
+            .col-auto
+              label.visually-hidden(for='autoSizingSelect') Gender
+              select#autoSizingSelect.form-select(itemid='gender' name='gender')
+                option(selected='') Gender
+                option(value='Male' name='gender') Male
+                option(value='Female' name='gender') Female
+              span#gender-error
+        br
+        .row.g-3
+          .col
+            .col-auto
+              label.visually-hidden(for='autoSizingSelect') Car Type
+              select#autoSizingSelect.form-select(name='cartype')
+                option(selected='') Car Type
+                option(value='Truck') Truck
+                option(value='Personal Car') Personal Car
+                option(value='Coaster') Coaster
+                option(value='Bodaboda') Bodaboda
+                option(value='Taxi') Taxi
+          .col
+            input#number-plate.form-control(type='text' placeholder='Number plate' aria-label='Number plate' name='numberplate')
+            span#number-plate-error
+          .col
+            input#color.form-control(type='text' placeholder='Color' aria-label='Color' name='color')
+            span#color-error
+        br
+        .row.g-3
+          .col
+            label(for='') Arrival time
+            input#arrival-time.form-control(type='time' placeholder='Arrival time' aria-label='Arrival time' name='arrivaltime')
+            span#arrival-time-error
+          .col
+            label(for='') Depature time
+            input#depature-time.form-control(type='time' placeholder='Depature Time' aria-label='Depature time' name='depaturetime')
+            span#departure-time-error
+        br
+        .row.g-3
+          .col
+            input.form-control(type='text' placeholder='contact' aria-label='contact' name='phone')
+            span#phone-error
+          .col
+            input#car-type.form-control(type='text' placeholder='Model' aria-label='Model' name='model')
+            span#car-type-error
+          .col
+            input#date.form-control(type='date' placeholder='Date' aria-label='Date' name='date')
+            span#date-error
+        br
+        .row.g-3
+          .col
+            .col-auto
+              label.visually-hidden(for='autoSizingSelect') Period
+              select#autoSizingSelect.form-select(name='period')
+                option(selected='') Period
+                option(value='Day') Day
+                option(value='Night') Night
+                option(value='Less than 3 hours') Less than 3 hours
+          .col
+            .col-auto
+              label.visually-hidden(for='autoSizingSelect')  Amount
+              select#autoSizingSelect.form-select(name='amount')
+                option(selected='') Amount
+                option(value='2000') 2000
+                option(value='1000') 3000
+                option(value='1000') 4000
+                option(value='1000') 5000
+                option(value='1000') 1000
+          .col
+            input.form-control(type='text' placeholder='NIN' aria-label='NIN' name='nin')
+            span#nin-error
+        br
+        br
+        .col(style='text-align: center;')
+          h1(style='font-size: 40px;') Other Services
+          br
+        .col
+          h3(style='font-size: 20px;')
+            u  Tyre clinic
+          br
+          .form-check.form-check-inline
+            input#inlineCheckbox1.form-check-input(type='checkbox' value='Tire Pressure' name='tireclinic')
+            label.form-check-label(for='inlineCheckbox1') Tire Pressure
+            input(type='number' placeholder='500' aria-label='Identifier' name='tirepressure')
+          .form-check.form-check-inline
+            input#inlineCheckbox2.form-check-input(type='checkbox' value='Valves' name='tireclinic')
+            label.form-check-label(for='inlineCheckbox2') Valves
+            input(type='number' placeholder='5000' aria-label='Identifier' name='valves')
+          .form-check.form-check-inline
+            input#inlineCheckbox2.form-check-input(type='checkbox' value='Puncture Fixing' name='tireclinic')
+            label.form-check-label(for='inlineCheckbox2') Puncture Fixing
+            input(type='number' placeholder='5000' aria-label='Identifier' name='puncturefixing')
+        br
+        .row.g-3
+          .col
+            .col
+              h3(style='font-size: 20px;')
+                u Battery Section
+              br
+              .col-auto
+                label.visually-hidden(for='autoSizingSelect')  Size
+                select#autoSizingSelect.form-select(name='size')
+                  option(selected='') Size
+                  option(value='Small') Small
+                  option(value='Medium') Medium
+                  option(value='Large') Large
+          .col
+            br
+            br
+            .col-auto
+              label.visually-hidden(for='autoSizingSelect') Price
+              select#autoSizingSelect.form-select(name='price')
+                option(selected='') Price
+                option(value='6000') 60000
+                option(value='100000') 10000
+                option(value='170000') 170000
+        br
+        br
+        button.btn.btn-primary(type='submit') Submit
+  script.
+    const servicesToggle = document.querySelector('.dropdown-toggle');
+    const servicesDropdown = document.querySelector('.dropdown-menu');
+    servicesToggle.addEventListener('click', function (event) {
+    event.preventDefault(); // Prevent default link behavior
+    servicesDropdown.classList.toggle('show');
+    });
+    // Close the dropdown if clicking outside
+    document.addEventListener('click', function (event) {
+    if (!servicesToggle.contains(event.target) && !servicesDropdown.contains(event.target)) {
+    servicesDropdown.classList.remove('show');
+    }
+    });
+  script(src='https://code.jquery.com/jquery-3.3.1.slim.min.js')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js')
+  script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.4/js/tether.min.js')
+  script(src='/js/validate.js')
